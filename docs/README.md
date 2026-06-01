@@ -1,0 +1,33 @@
+# Growth Habit Lab Documentation
+
+This documentation supports the Android learning project in this repository. The goal is to learn growth analytics, Firebase Analytics, Remote Config, and A/B testing by building a small real-world style habit app.
+
+## Reading Order
+
+1. [Project Map](00-project-map.md)
+2. [Implementation Plan](01-implementation-plan.md)
+3. [Analytics Taxonomy](02-analytics-taxonomy.md)
+
+## Product Direction
+
+The app will become Growth Habit Lab, a five-page habit tracking experience designed around measurable growth loops:
+
+1. Onboarding
+2. Habit Setup
+3. Home
+4. Progress
+5. Analytics Lab
+
+Each feature will be implemented in small reviewable rounds. Every round should preserve the Clean Architecture boundary, include tests for externally observable behavior, and avoid source code comments.
+
+## Workflow
+
+Each development round follows this sequence:
+
+1. Plan the slice.
+2. Implement the slice.
+3. Run relevant tests.
+4. Review changes.
+5. Commit only after approval.
+6. Merge and switch to the next branch after approval.
+
