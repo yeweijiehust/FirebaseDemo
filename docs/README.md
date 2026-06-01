@@ -7,6 +7,7 @@ This documentation supports the Android learning project in this repository. The
 1. [Project Map](00-project-map.md)
 2. [Implementation Plan](01-implementation-plan.md)
 3. [Analytics Taxonomy](02-analytics-taxonomy.md)
+4. [App Shell And Navigation](03-app-shell-navigation.md)
 
 ## Product Direction
 
@@ -30,4 +31,3 @@ Each development round follows this sequence:
 4. Review changes.
 5. Commit only after approval.
 6. Merge and switch to the next branch after approval.
-
