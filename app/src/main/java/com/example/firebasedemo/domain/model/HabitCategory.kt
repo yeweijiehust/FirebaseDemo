@@ -4,5 +4,11 @@ enum class HabitCategory(val analyticsValue: String) {
     CONSISTENCY("consistency"),
     FOCUS("focus"),
     LEARNING("learning"),
-    MOVEMENT("movement")
+    MOVEMENT("movement");
+
+    companion object {
+        fun fromAnalyticsValue(value: String): HabitCategory? {
+            return entries.firstOrNull { it.analyticsValue == value }
+        }
+    }
 }

@@ -9,6 +9,7 @@ This documentation supports the Android learning project in this repository. The
 3. [Analytics Taxonomy](02-analytics-taxonomy.md)
 4. [App Shell And Navigation](03-app-shell-navigation.md)
 5. [Domain Layer](04-domain-layer.md)
+6. [Local Persistence](05-local-persistence.md)
 
 ## Product Direction
 
