@@ -8,6 +8,7 @@ This documentation supports the Android learning project in this repository. The
 2. [Implementation Plan](01-implementation-plan.md)
 3. [Analytics Taxonomy](02-analytics-taxonomy.md)
 4. [App Shell And Navigation](03-app-shell-navigation.md)
+5. [Domain Layer](04-domain-layer.md)
 
 ## Product Direction
 
