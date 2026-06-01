@@ -1,6 +1,9 @@
 package com.example.firebasedemo
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Composable
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,8 +15,24 @@ import com.example.firebasedemo.feature.progress.ProgressScreen
 import com.example.firebasedemo.navigation.GrowthHabitDestination
 
 @Composable
-fun GrowthHabitApp() {
+fun GrowthHabitApp(
+    appAnalyticsViewModel: AppAnalyticsViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
+    val currentBackStackEntry = navController.currentBackStackEntryAsState()
+    val currentDestination = GrowthHabitDestination.fromRoute(
+        currentBackStackEntry.value?.destination?.route
+    )
+
+    LaunchedEffect(Unit) {
+        appAnalyticsViewModel.onAppShown()
+    }
+
+    LaunchedEffect(currentDestination?.screenName) {
+        currentDestination?.let {
+            appAnalyticsViewModel.onScreenShown(it.screenName)
+        }
+    }
 
     NavHost(
         navController = navController,
