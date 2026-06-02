@@ -13,6 +13,9 @@ This documentation supports the Android learning project in this repository. The
 7. [Analytics Layer](06-analytics-layer.md)
 8. [Remote Config Layer](07-remote-config-layer.md)
 9. [Full UI Flow](08-full-ui-flow.md)
+10. [Firebase DebugView Checklist](09-debugview-checklist.md)
+11. [A/B Test Playbook](10-ab-test-playbook.md)
+12. [Growth Funnel Analysis](11-growth-funnel-analysis.md)
 
 ## Product Direction
 
