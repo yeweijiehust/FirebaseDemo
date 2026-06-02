@@ -1,7 +1,6 @@
 package com.example.firebasedemo
 
-import com.example.firebasedemo.core.analytics.AnalyticsEvent
-import com.example.firebasedemo.core.analytics.AnalyticsTracker
+import com.example.firebasedemo.testing.RecordingAnalyticsTracker
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -42,18 +41,5 @@ class AppAnalyticsViewModelTest {
             listOf("onboarding", "habit_setup", "home"),
             analyticsTracker.events.map { it.parameters["screen_name"] }
         )
-    }
-
-    private class RecordingAnalyticsTracker : AnalyticsTracker {
-        val events = mutableListOf<AnalyticsEvent>()
-        val userProperties = mutableMapOf<String, String?>()
-
-        override fun track(event: AnalyticsEvent) {
-            events += event
-        }
-
-        override fun setUserProperty(name: String, value: String?) {
-            userProperties[name] = value
-        }
     }
 }

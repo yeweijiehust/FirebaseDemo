@@ -1,11 +1,11 @@
 package com.example.firebasedemo.core.remoteconfig
 
 import com.example.firebasedemo.core.analytics.AnalyticsEvent
-import com.example.firebasedemo.core.analytics.AnalyticsTracker
 import com.example.firebasedemo.domain.model.HabitSuggestionVariant
 import com.example.firebasedemo.domain.model.HomeHeadlineVariant
 import com.example.firebasedemo.domain.model.OnboardingVariant
 import com.example.firebasedemo.navigation.GrowthHabitDestination
+import com.example.firebasedemo.testing.RecordingAnalyticsTracker
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -44,18 +44,5 @@ class ExperimentExposureTrackerTest {
         exposureTracker.expose(GrowthHabitDestination.Progress, config)
 
         assertEquals(emptyList<AnalyticsEvent>(), analyticsTracker.events)
-    }
-
-    private class RecordingAnalyticsTracker : AnalyticsTracker {
-        val events = mutableListOf<AnalyticsEvent>()
-        val userProperties = mutableMapOf<String, String?>()
-
-        override fun track(event: AnalyticsEvent) {
-            events += event
-        }
-
-        override fun setUserProperty(name: String, value: String?) {
-            userProperties[name] = value
-        }
     }
 }
