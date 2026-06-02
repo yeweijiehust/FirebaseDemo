@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
@@ -15,11 +16,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun AnalyticsLabScreen(
-    onBack: () -> Unit
+    onBack: () -> Unit,
+    onResetComplete: () -> Unit,
+    viewModel: AnalyticsLabViewModel = hiltViewModel()
 ) {
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -49,6 +56,22 @@ fun AnalyticsLabScreen(
                 title = "DebugView checklist",
                 body = "Open the app, select a goal, create a habit, log today, then inspect event names and parameters in Firebase DebugView."
             )
+            LearningCard(
+                title = "Repeat the funnel",
+                body = "Reset your local journey when you want to practice the activation funnel again without using adb or Android settings."
+            )
+            OutlinedButton(
+                onClick = {
+                    viewModel.resetJourney(onResetComplete)
+                },
+                enabled = !uiState.value.isResetting,
+                colors = ButtonDefaults.outlinedButtonColors(
+                    contentColor = MaterialTheme.colorScheme.error
+                ),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = if (uiState.value.isResetting) "Resetting journey" else "Reset learning journey")
+            }
             OutlinedButton(
                 onClick = onBack,
                 modifier = Modifier.fillMaxWidth()

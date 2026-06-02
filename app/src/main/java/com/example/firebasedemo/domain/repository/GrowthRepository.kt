@@ -13,4 +13,5 @@ interface GrowthRepository {
     suspend fun saveActiveHabit(habit: Habit)
     suspend fun habitLogs(habitId: String): List<HabitLog>
     suspend fun logHabit(habitId: String, date: LocalDate): HabitLogResult
+    suspend fun resetJourney()
 }

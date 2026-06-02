@@ -37,4 +37,20 @@ interface GrowthDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertHabitLog(entity: HabitLogEntity): Long
+
+    @Query("DELETE FROM habit_logs")
+    suspend fun deleteHabitLogs()
+
+    @Query("DELETE FROM habits")
+    suspend fun deleteHabits()
+
+    @Query("DELETE FROM onboarding_state")
+    suspend fun deleteOnboardingState()
+
+    @Transaction
+    suspend fun resetJourney() {
+        deleteHabitLogs()
+        deleteHabits()
+        deleteOnboardingState()
+    }
 }

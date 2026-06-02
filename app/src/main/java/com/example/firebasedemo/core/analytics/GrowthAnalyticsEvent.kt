@@ -135,6 +135,13 @@ object GrowthAnalyticsEvent {
         )
     }
 
+    fun learningJourneyReset(source: String): AnalyticsEvent {
+        return AnalyticsEvent(
+            name = Name.LEARNING_JOURNEY_RESET,
+            parameters = mapOf(Parameter.SOURCE to source)
+        )
+    }
+
     object Name {
         const val APP_OPENED = "app_opened"
         const val SCREEN_VIEWED = "screen_viewed"
@@ -148,6 +155,7 @@ object GrowthAnalyticsEvent {
         const val EXPERIMENT_EXPOSED = "experiment_exposed"
         const val REMOTE_CONFIG_ACTIVATED = "remote_config_activated"
         const val REMOTE_CONFIG_FETCH_FAILED = "remote_config_fetch_failed"
+        const val LEARNING_JOURNEY_RESET = "learning_journey_reset"
     }
 
     object Parameter {

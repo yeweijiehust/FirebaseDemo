@@ -11,4 +11,5 @@ interface GrowthLocalDataSource {
     suspend fun saveActiveHabit(entity: HabitEntity)
     suspend fun habitLogs(habitId: String): List<HabitLogEntity>
     suspend fun insertHabitLog(entity: HabitLogEntity): Boolean
+    suspend fun resetJourney()
 }

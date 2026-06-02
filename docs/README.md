@@ -17,6 +17,7 @@ This documentation supports the Android learning project in this repository. The
 11. [A/B Test Playbook](10-ab-test-playbook.md)
 12. [Growth Funnel Analysis](11-growth-funnel-analysis.md)
 13. [Experiment Assignment Timing](12-experiment-assignment-timing.md)
+14. [Reset Learning Journey](13-reset-learning-journey.md)
 
 ## Product Direction
 

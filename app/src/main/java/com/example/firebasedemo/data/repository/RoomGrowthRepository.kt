@@ -44,4 +44,8 @@ class RoomGrowthRepository @Inject constructor(
             HabitLogResult.AlreadyLogged(habitLog)
         }
     }
+
+    override suspend fun resetJourney() {
+        localDataSource.resetJourney()
+    }
 }

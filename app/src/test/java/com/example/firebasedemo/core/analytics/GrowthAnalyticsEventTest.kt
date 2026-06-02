@@ -51,4 +51,12 @@ class GrowthAnalyticsEventTest {
             event.parameters
         )
     }
+
+    @Test
+    fun learningJourneyResetIncludesSource() {
+        val event = GrowthAnalyticsEvent.learningJourneyReset("analytics_lab")
+
+        assertEquals("learning_journey_reset", event.name)
+        assertEquals(mapOf("source" to "analytics_lab"), event.parameters)
+    }
 }

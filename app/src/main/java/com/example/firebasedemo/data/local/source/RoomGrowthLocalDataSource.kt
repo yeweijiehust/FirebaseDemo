@@ -32,4 +32,8 @@ class RoomGrowthLocalDataSource @Inject constructor(
     override suspend fun insertHabitLog(entity: HabitLogEntity): Boolean {
         return growthDao.insertHabitLog(entity) != -1L
     }
+
+    override suspend fun resetJourney() {
+        growthDao.resetJourney()
+    }
 }
