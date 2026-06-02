@@ -88,9 +88,17 @@ class FirebaseExperimentConfigProvider @Inject constructor(
     }
 
     companion object {
-        fun settings(): FirebaseRemoteConfigSettings {
+        private const val DEBUG_MINIMUM_FETCH_INTERVAL_SECONDS = 0L
+        private const val RELEASE_MINIMUM_FETCH_INTERVAL_SECONDS = 3600L
+
+        fun settings(isDebugBuild: Boolean): FirebaseRemoteConfigSettings {
+            val minimumFetchIntervalSeconds = if (isDebugBuild) {
+                DEBUG_MINIMUM_FETCH_INTERVAL_SECONDS
+            } else {
+                RELEASE_MINIMUM_FETCH_INTERVAL_SECONDS
+            }
             return FirebaseRemoteConfigSettings.Builder()
-                .setMinimumFetchIntervalInSeconds(3600)
+                .setMinimumFetchIntervalInSeconds(minimumFetchIntervalSeconds)
                 .build()
         }
     }

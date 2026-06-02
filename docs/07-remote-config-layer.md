@@ -22,6 +22,16 @@ analytics_lab_enabled=true
 
 The app always has defaults, so it can run before Firebase fetch succeeds.
 
+## Fetch Interval
+
+Debug builds use a zero-second minimum fetch interval so Firebase Console changes can be tested quickly while learning.
+
+Release builds keep a one-hour minimum fetch interval:
+
+```text
+3600 seconds
+```
+
 ## Variants
 
 `onboarding_variant` controls the onboarding presentation:
