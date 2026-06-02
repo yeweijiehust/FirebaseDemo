@@ -81,6 +81,12 @@ class GetGrowthMetricsUseCaseTest {
         override suspend fun logHabit(habitId: String, date: LocalDate): HabitLogResult {
             return HabitLogResult.Logged(HabitLog(habitId, date))
         }
+
+        override suspend fun resetJourney() {
+            goalId = null
+            habit = null
+            logs = emptyList()
+        }
     }
 
     private companion object {

@@ -94,6 +94,13 @@ fun GrowthHabitApp(
                 AnalyticsLabScreen(
                     onBack = {
                         navController.popBackStack()
+                    },
+                    onResetComplete = {
+                        navController.navigate(GrowthHabitDestination.Onboarding.route) {
+                            popUpTo(GrowthHabitDestination.Home.route) {
+                                inclusive = true
+                            }
+                        }
                     }
                 )
             }

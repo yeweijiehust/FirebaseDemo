@@ -79,6 +79,24 @@ class RoomGrowthRepositoryTest {
         )
     }
 
+    @Test
+    fun resetJourneyClearsGoalHabitAndLogs() = runBlocking {
+        val habit = Habit(
+            id = "focus_sprint",
+            title = "Do one focus sprint",
+            category = HabitCategory.FOCUS
+        )
+        repository.saveSelectedGoal(OnboardingGoalId.IMPROVE_FOCUS)
+        repository.saveActiveHabit(habit)
+        repository.logHabit(habit.id, LocalDate.of(2026, 6, 1))
+
+        repository.resetJourney()
+
+        assertNull(repository.selectedGoalId())
+        assertNull(repository.activeHabit())
+        assertEquals(emptyList<LocalDate>(), repository.habitLogs(habit.id).map { it.loggedDate })
+    }
+
     private class FakeGrowthLocalDataSource : GrowthLocalDataSource {
         private var selectedGoal: OnboardingStateEntity? = null
         private var activeHabit: HabitEntity? = null
@@ -108,6 +126,12 @@ class RoomGrowthRepositoryTest {
 
         override suspend fun insertHabitLog(entity: HabitLogEntity): Boolean {
             return habitLogs.add(entity)
+        }
+
+        override suspend fun resetJourney() {
+            selectedGoal = null
+            activeHabit = null
+            habitLogs.clear()
         }
     }
 }
