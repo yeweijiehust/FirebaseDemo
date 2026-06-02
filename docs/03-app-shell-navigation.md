@@ -24,21 +24,29 @@ Home -> Progress -> Home
 Home -> Analytics Lab -> Home
 ```
 
-## Future Analytics Attachment Points
+The app also resumes from saved local journey state:
 
-`Onboarding` will emit onboarding and experiment exposure events.
+```text
+no selected goal -> Onboarding
+selected goal without active habit -> Habit Setup
+active habit -> Home
+```
 
-`Habit Setup` will emit habit suggestion and habit creation events.
+## Analytics Attachment Points
 
-`Home` will emit screen, experiment exposure, and habit logging events.
+`Onboarding` emits onboarding and experiment exposure events.
 
-`Progress` will emit progress viewing events.
+`Habit Setup` emits habit suggestion and habit creation events.
 
-`Analytics Lab` will explain the event taxonomy and experiment setup from inside the app.
+`Home` emits screen, experiment exposure, and habit logging events.
 
-## Current Intentional Limitations
+`Progress` emits progress viewing events.
 
-The screens are placeholders. They do not yet load domain state, persist data, or call Firebase.
+`Analytics Lab` explains the event taxonomy and experiment setup from inside the app, and can reset local journey state for repeated funnel practice.
 
-This keeps the shell easy to review before the domain and data layers arrive.
+## Round Context
+
+During Round 2, the screens were intentionally placeholders so the shell could be reviewed before domain, persistence, analytics, and Remote Config behavior arrived.
+
+Later rounds replaced those placeholders with working feature screens.
 

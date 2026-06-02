@@ -2,7 +2,7 @@
 
 ## Current State
 
-This repository is a single-module Android app.
+This repository is a single-module Android app for Growth Habit Lab.
 
 ```text
 FirebaseDemo
@@ -10,6 +10,11 @@ FirebaseDemo
     src
       main
         java/com/example/firebasedemo
+          core
+          data
+          domain
+          feature
+          navigation
           MainActivity.kt
           ui/theme
         res
@@ -22,7 +27,19 @@ FirebaseDemo
 
 ## Current Entry Point
 
-`MainActivity` hosts a Compose UI through `setContent`. The current screen is still the generated starter greeting. Future rounds will replace this with app navigation.
+`MainActivity` hosts `GrowthHabitApp` through Compose `setContent`.
+
+The app now renders a five-screen growth analytics learning flow:
+
+```text
+Onboarding
+Habit Setup
+Home
+Progress
+Analytics Lab
+```
+
+Startup waits for Remote Config readiness and saved journey-state resolution before rendering the first destination.
 
 ## Current Dependencies
 
@@ -43,7 +60,7 @@ Retrofit and OkHttp
 
 No additional dependency is required for the first product version.
 
-## Planned Package Layout
+## Package Layout
 
 ```text
 com.example.firebasedemo
@@ -79,4 +96,3 @@ Data code implements domain repository interfaces and owns local persistence det
 Feature code owns ViewModels, UI state, and Compose screens.
 
 Core analytics and Remote Config wrappers isolate Firebase SDK calls from the rest of the app.
-

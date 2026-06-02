@@ -17,8 +17,11 @@ HabitLog
 HabitLogResult
 HabitSuggestionSource
 HabitSuggestionVariant
+HomeHeadlineVariant
+JourneyStartPoint
 OnboardingGoal
 OnboardingGoalId
+OnboardingVariant
 SuggestedHabit
 ```
 
@@ -29,6 +32,10 @@ SuggestedHabit
 `GetSuggestedHabitsUseCase` returns popular or personalized habit suggestions.
 
 `CalculateGrowthMetricsUseCase` turns habit logs into growth metrics.
+
+`GetJourneyStartPointUseCase` chooses whether startup should open Onboarding, Habit Setup, or Home.
+
+`ResetLearningJourneyUseCase` clears local journey state for repeated funnel practice.
 
 ## Metric Rules
 
@@ -53,13 +60,14 @@ activeHabit
 saveActiveHabit
 habitLogs
 logHabit
+resetJourney
 ```
 
-The interface lives in the domain layer, but the implementation will arrive in the data layer during a later round.
+The interface lives in the domain layer. The data layer implements it with Room-backed persistence.
 
 ## Why This Matters For Analytics
 
 Analytics should measure domain behavior, not UI implementation details.
 
-Stable domain IDs such as `build_consistency`, `focus_sprint`, and `activated` will become Firebase event parameters and user properties in later rounds.
+Stable domain IDs such as `build_consistency`, `focus_sprint`, and `activated` become Firebase event parameters and user properties.
 

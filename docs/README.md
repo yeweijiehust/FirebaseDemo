@@ -22,6 +22,7 @@ This documentation supports the Android learning project in this repository. The
 16. [Resume Journey Routing](15-resume-journey-routing.md)
 17. [ViewModel Behavior Tests](16-viewmodel-behavior-tests.md)
 18. [Replace Generated Tests](17-replace-generated-tests.md)
+19. [Docs Freshness Pass](18-docs-freshness-pass.md)
 
 ## Product Direction
 
