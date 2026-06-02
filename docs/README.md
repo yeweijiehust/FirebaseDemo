@@ -12,6 +12,7 @@ This documentation supports the Android learning project in this repository. The
 6. [Local Persistence](05-local-persistence.md)
 7. [Analytics Layer](06-analytics-layer.md)
 8. [Remote Config Layer](07-remote-config-layer.md)
+9. [Full UI Flow](08-full-ui-flow.md)
 
 ## Product Direction
 

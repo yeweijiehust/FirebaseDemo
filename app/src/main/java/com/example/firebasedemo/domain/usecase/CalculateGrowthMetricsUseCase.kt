@@ -4,8 +4,9 @@ import com.example.firebasedemo.domain.model.ActivationStatus
 import com.example.firebasedemo.domain.model.GrowthMetrics
 import com.example.firebasedemo.domain.model.HabitLog
 import java.time.LocalDate
+import javax.inject.Inject
 
-class CalculateGrowthMetricsUseCase {
+class CalculateGrowthMetricsUseCase @Inject constructor() {
     operator fun invoke(
         onboardingCompleted: Boolean,
         logs: List<HabitLog>,

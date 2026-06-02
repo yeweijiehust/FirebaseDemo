@@ -6,8 +6,9 @@ import com.example.firebasedemo.domain.model.HabitSuggestionSource
 import com.example.firebasedemo.domain.model.HabitSuggestionVariant
 import com.example.firebasedemo.domain.model.OnboardingGoalId
 import com.example.firebasedemo.domain.model.SuggestedHabit
+import javax.inject.Inject
 
-class GetSuggestedHabitsUseCase {
+class GetSuggestedHabitsUseCase @Inject constructor() {
     operator fun invoke(
         goalId: OnboardingGoalId,
         variant: HabitSuggestionVariant
