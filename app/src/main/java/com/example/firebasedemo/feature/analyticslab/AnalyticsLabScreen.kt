@@ -48,9 +48,11 @@ fun AnalyticsLabScreen(
                 title = "Growth funnel",
                 body = "app_opened -> onboarding_started -> onboarding_completed -> habit_created -> habit_logged -> progress_viewed"
             )
-            LearningCard(
-                title = "Experiment surfaces",
-                body = "Onboarding compares control and guided copy. Habit Setup compares popular and personalized suggestions. Home compares progress and streak headlines."
+            EventCatalogCard(
+                events = AnalyticsLabReference.eventCatalog
+            )
+            ExperimentCatalogCard(
+                experiments = AnalyticsLabReference.experimentCatalog
             )
             LearningCard(
                 title = "DebugView checklist",
@@ -79,6 +81,71 @@ fun AnalyticsLabScreen(
                 Text(text = "Back to home")
             }
         }
+    }
+}
+
+@Composable
+private fun EventCatalogCard(events: List<AnalyticsEventReference>) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Event catalog",
+                style = MaterialTheme.typography.titleMedium
+            )
+            events.forEach { event ->
+                ReferenceRow(
+                    title = event.name,
+                    body = "${event.whenItFires} Parameters: ${event.parameters.joinToString()}"
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ExperimentCatalogCard(experiments: List<ExperimentReference>) {
+    Card(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            modifier = Modifier.padding(18.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Text(
+                text = "Remote Config experiments",
+                style = MaterialTheme.typography.titleMedium
+            )
+            experiments.forEach { experiment ->
+                ReferenceRow(
+                    title = experiment.key,
+                    body = "${experiment.surface}: ${experiment.variants.joinToString(separator = " vs ")}"
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReferenceRow(
+    title: String,
+    body: String
+) {
+    Column(
+        verticalArrangement = Arrangement.spacedBy(4.dp)
+    ) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.labelLarge
+        )
+        Text(
+            text = body,
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
 
