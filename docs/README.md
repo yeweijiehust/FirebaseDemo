@@ -19,6 +19,7 @@ This documentation supports the Android learning project in this repository. The
 13. [Experiment Assignment Timing](12-experiment-assignment-timing.md)
 14. [Reset Learning Journey](13-reset-learning-journey.md)
 15. [Analytics Lab Reference](14-analytics-lab-reference.md)
+16. [Resume Journey Routing](15-resume-journey-routing.md)
 
 ## Product Direction
 

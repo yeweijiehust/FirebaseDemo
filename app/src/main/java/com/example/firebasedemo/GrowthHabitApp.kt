@@ -19,6 +19,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.firebasedemo.domain.model.JourneyStartPoint
 import com.example.firebasedemo.feature.analyticslab.AnalyticsLabScreen
 import com.example.firebasedemo.feature.habitsetup.HabitSetupScreen
 import com.example.firebasedemo.feature.home.HomeScreen
@@ -29,10 +30,12 @@ import com.example.firebasedemo.navigation.GrowthHabitDestination
 @Composable
 fun GrowthHabitApp(
     appAnalyticsViewModel: AppAnalyticsViewModel = hiltViewModel(),
-    appExperimentViewModel: AppExperimentViewModel = hiltViewModel()
+    appExperimentViewModel: AppExperimentViewModel = hiltViewModel(),
+    appJourneyViewModel: AppJourneyViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
     val experimentUiState = appExperimentViewModel.uiState.collectAsStateWithLifecycle()
+    val journeyUiState = appJourneyViewModel.uiState.collectAsStateWithLifecycle()
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
     val currentDestination = GrowthHabitDestination.fromRoute(
         currentBackStackEntry.value?.destination?.route
@@ -41,6 +44,7 @@ fun GrowthHabitApp(
     LaunchedEffect(Unit) {
         appAnalyticsViewModel.onAppShown()
         appExperimentViewModel.refreshConfig()
+        appJourneyViewModel.resolveStartPoint()
     }
 
     LaunchedEffect(currentDestination?.screenName) {
@@ -50,10 +54,11 @@ fun GrowthHabitApp(
         }
     }
 
-    if (experimentUiState.value.isReady) {
+    if (experimentUiState.value.isReady && journeyUiState.value.isReady) {
+        val startDestination = journeyUiState.value.startPoint.destination()
         NavHost(
             navController = navController,
-            startDestination = GrowthHabitDestination.Onboarding.route
+            startDestination = startDestination.route
         ) {
             composable(GrowthHabitDestination.Onboarding.route) {
                 OnboardingScreen(
@@ -66,7 +71,7 @@ fun GrowthHabitApp(
                 HabitSetupScreen(
                     onContinue = {
                         navController.navigate(GrowthHabitDestination.Home.route) {
-                            popUpTo(GrowthHabitDestination.Onboarding.route) {
+                            popUpTo(startDestination.route) {
                                 inclusive = true
                             }
                         }
@@ -107,6 +112,14 @@ fun GrowthHabitApp(
         }
     } else {
         ExperimentLoadingScreen()
+    }
+}
+
+private fun JourneyStartPoint.destination(): GrowthHabitDestination {
+    return when (this) {
+        JourneyStartPoint.ONBOARDING -> GrowthHabitDestination.Onboarding
+        JourneyStartPoint.HABIT_SETUP -> GrowthHabitDestination.HabitSetup
+        JourneyStartPoint.HOME -> GrowthHabitDestination.Home
     }
 }
 
