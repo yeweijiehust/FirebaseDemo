@@ -16,6 +16,7 @@ This documentation supports the Android learning project in this repository. The
 10. [Firebase DebugView Checklist](09-debugview-checklist.md)
 11. [A/B Test Playbook](10-ab-test-playbook.md)
 12. [Growth Funnel Analysis](11-growth-funnel-analysis.md)
+13. [Experiment Assignment Timing](12-experiment-assignment-timing.md)
 
 ## Product Direction
 

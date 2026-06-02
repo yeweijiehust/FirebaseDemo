@@ -2,81 +2,49 @@ package com.example.firebasedemo
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.firebasedemo.core.analytics.AnalyticsTracker
-import com.example.firebasedemo.core.analytics.GrowthAnalyticsEvent
-import com.example.firebasedemo.core.remoteconfig.ExperimentConfigProvider
-import com.example.firebasedemo.core.remoteconfig.ExperimentKey
-import com.example.firebasedemo.core.remoteconfig.GrowthExperimentConfig
-import com.example.firebasedemo.core.remoteconfig.RemoteConfigDefaults
+import com.example.firebasedemo.core.remoteconfig.ExperimentExposureTracker
+import com.example.firebasedemo.core.remoteconfig.RefreshExperimentConfigUseCase
 import com.example.firebasedemo.navigation.GrowthHabitDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 @HiltViewModel
 class AppExperimentViewModel @Inject constructor(
-    private val configProvider: ExperimentConfigProvider,
-    private val analyticsTracker: AnalyticsTracker
+    private val refreshExperimentConfig: RefreshExperimentConfigUseCase,
+    private val exposureTracker: ExperimentExposureTracker
 ) : ViewModel() {
-    private val _config = MutableStateFlow(RemoteConfigDefaults.growthExperimentConfig)
-    val config: StateFlow<GrowthExperimentConfig> = _config.asStateFlow()
-    private val exposedExperiments = mutableSetOf<String>()
-
-    init {
-        _config.value = configProvider.currentConfig()
-    }
+    private val _uiState = MutableStateFlow(AppExperimentUiState())
+    val uiState: StateFlow<AppExperimentUiState> = _uiState.asStateFlow()
 
     fun refreshConfig() {
+        if (_uiState.value.isReady || _uiState.value.isRefreshing) {
+            return
+        }
+
+        _uiState.update { it.copy(isRefreshing = true) }
         viewModelScope.launch {
-            configProvider.refresh()
-            _config.value = configProvider.currentConfig()
+            val assignment = refreshExperimentConfig()
+            _uiState.update {
+                it.copy(
+                    config = assignment.config,
+                    isReady = true,
+                    isRefreshing = false,
+                    refreshResult = assignment.refreshResult
+                )
+            }
         }
     }
 
     fun exposeScreenExperiments(destination: GrowthHabitDestination) {
-        when (destination) {
-            GrowthHabitDestination.Onboarding -> expose(
-                experimentKey = ExperimentKey.ONBOARDING_VARIANT,
-                variant = _config.value.onboardingVariant.remoteConfigValue,
-                screenName = destination.screenName
-            )
-
-            GrowthHabitDestination.HabitSetup -> expose(
-                experimentKey = ExperimentKey.SUGGESTED_HABIT_VARIANT,
-                variant = _config.value.suggestedHabitVariant.remoteConfigValue,
-                screenName = destination.screenName
-            )
-
-            GrowthHabitDestination.Home -> expose(
-                experimentKey = ExperimentKey.HOME_HEADLINE_VARIANT,
-                variant = _config.value.homeHeadlineVariant.remoteConfigValue,
-                screenName = destination.screenName
-            )
-
-            GrowthHabitDestination.AnalyticsLab,
-            GrowthHabitDestination.Progress -> Unit
-        }
-    }
-
-    private fun expose(
-        experimentKey: String,
-        variant: String,
-        screenName: String
-    ) {
-        val exposureId = "$experimentKey:$screenName"
-        if (!exposedExperiments.add(exposureId)) {
+        if (!_uiState.value.isReady) {
             return
         }
 
-        analyticsTracker.track(
-            GrowthAnalyticsEvent.experimentExposed(
-                experimentKey = experimentKey,
-                variant = variant,
-                screenName = screenName
-            )
-        )
+        exposureTracker.expose(destination, _uiState.value.config)
     }
 }
