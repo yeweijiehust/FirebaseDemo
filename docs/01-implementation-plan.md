@@ -401,3 +401,17 @@ Verification:
 ./gradlew.bat testDebugUnitTest
 ./gradlew.bat assembleDebugAndroidTest
 ```
+
+### Round 15: Docs Freshness Pass
+
+Scope:
+
+1. Update older docs that still describe generated starter or placeholder state as current.
+2. Document current package shape, navigation behavior, resume routing, reset behavior, and Room DAO coverage.
+3. Preserve round-by-round historical context while removing stale current-state wording.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```

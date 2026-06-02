@@ -42,14 +42,22 @@ The UI and domain layers do not know that Room exists.
 
 ## Testing Approach
 
-Repository tests use a fake local data source. This keeps the tests focused on observable repository behavior:
+Repository tests use a fake local data source. This keeps those tests focused on observable repository behavior:
 
 ```text
 selected goal storage
 active habit storage
 duplicate log handling
 date ordering
+reset behavior
 ```
 
-Room query behavior is intentionally kept thin and will be covered by compile checks and later integration testing instead of brittle implementation-detail tests.
+Room query behavior is intentionally kept thin.
+
+Instrumented DAO tests cover key Room-backed behavior:
+
+```text
+active habit replacement
+reset journey persistence cleanup
+```
 
