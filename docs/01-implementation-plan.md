@@ -386,3 +386,18 @@ Verification:
 ```text
 ./gradlew.bat testDebugUnitTest
 ```
+
+### Round 14: Replace Generated Tests
+
+Scope:
+
+1. Remove generated starter unit and instrumented tests.
+2. Add an instrumented Room DAO persistence test.
+3. Cover active habit replacement and reset journey persistence behavior.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+./gradlew.bat assembleDebugAndroidTest
+```

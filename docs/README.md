@@ -21,6 +21,7 @@ This documentation supports the Android learning project in this repository. The
 15. [Analytics Lab Reference](14-analytics-lab-reference.md)
 16. [Resume Journey Routing](15-resume-journey-routing.md)
 17. [ViewModel Behavior Tests](16-viewmodel-behavior-tests.md)
+18. [Replace Generated Tests](17-replace-generated-tests.md)
 
 ## Product Direction
 
