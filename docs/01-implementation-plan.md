@@ -371,3 +371,18 @@ Verification:
 ```text
 ./gradlew.bat testDebugUnitTest
 ```
+
+### Round 13: ViewModel Behavior Tests
+
+Scope:
+
+1. Add reusable unit-test fakes for analytics, repositories, Remote Config, and Main dispatcher control.
+2. Test onboarding selection and completion behavior.
+3. Test Home refresh, new log tracking, and duplicate-log suppression.
+4. Test Analytics Lab reset cleanup, analytics, user properties, and completion callback.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```

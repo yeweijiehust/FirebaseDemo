@@ -20,6 +20,7 @@ This documentation supports the Android learning project in this repository. The
 14. [Reset Learning Journey](13-reset-learning-journey.md)
 15. [Analytics Lab Reference](14-analytics-lab-reference.md)
 16. [Resume Journey Routing](15-resume-journey-routing.md)
+17. [ViewModel Behavior Tests](16-viewmodel-behavior-tests.md)
 
 ## Product Direction
 
