@@ -415,3 +415,18 @@ Verification:
 ```text
 ./gradlew.bat testDebugUnitTest
 ```
+
+### Round 16: Debug Remote Config Refresh
+
+Scope:
+
+1. Use immediate Remote Config fetches for debug builds.
+2. Keep a one-hour minimum fetch interval for release builds.
+3. Test debug and release settings.
+4. Document the learning workflow impact.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```
