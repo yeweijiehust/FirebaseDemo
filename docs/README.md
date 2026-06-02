@@ -11,6 +11,7 @@ This documentation supports the Android learning project in this repository. The
 5. [Domain Layer](04-domain-layer.md)
 6. [Local Persistence](05-local-persistence.md)
 7. [Analytics Layer](06-analytics-layer.md)
+8. [Remote Config Layer](07-remote-config-layer.md)
 
 ## Product Direction
 

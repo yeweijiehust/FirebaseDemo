@@ -16,7 +16,8 @@ import com.example.firebasedemo.navigation.GrowthHabitDestination
 
 @Composable
 fun GrowthHabitApp(
-    appAnalyticsViewModel: AppAnalyticsViewModel = hiltViewModel()
+    appAnalyticsViewModel: AppAnalyticsViewModel = hiltViewModel(),
+    appExperimentViewModel: AppExperimentViewModel = hiltViewModel()
 ) {
     val navController = rememberNavController()
     val currentBackStackEntry = navController.currentBackStackEntryAsState()
@@ -26,11 +27,13 @@ fun GrowthHabitApp(
 
     LaunchedEffect(Unit) {
         appAnalyticsViewModel.onAppShown()
+        appExperimentViewModel.refreshConfig()
     }
 
     LaunchedEffect(currentDestination?.screenName) {
         currentDestination?.let {
             appAnalyticsViewModel.onScreenShown(it.screenName)
+            appExperimentViewModel.exposeScreenExperiments(it)
         }
     }
 
