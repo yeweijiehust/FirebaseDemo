@@ -2,8 +2,9 @@ package com.example.firebasedemo.domain.usecase
 
 import com.example.firebasedemo.domain.model.OnboardingGoal
 import com.example.firebasedemo.domain.model.OnboardingGoalId
+import javax.inject.Inject
 
-class GetOnboardingGoalsUseCase {
+class GetOnboardingGoalsUseCase @Inject constructor() {
     operator fun invoke(): List<OnboardingGoal> = listOf(
         OnboardingGoal(
             id = OnboardingGoalId.BUILD_CONSISTENCY,
