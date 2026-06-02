@@ -40,8 +40,23 @@ Use this flow when you want to verify a clean first-user journey:
 8. Tap Log today.
 9. Open Progress.
 10. Open Analytics Lab.
+11. Tap Reset learning journey when you want to repeat the funnel without uninstalling the app.
 
-## 4. Expected Event Order
+## 4. Resume Test
+
+Use this flow to verify that saved journey state controls startup:
+
+1. Complete onboarding and close the app before creating a habit.
+2. Reopen the app.
+3. Confirm the app opens Habit Setup.
+4. Create a habit and close the app.
+5. Reopen the app.
+6. Confirm the app opens Home.
+7. Reset the learning journey from Analytics Lab.
+8. Reopen the app.
+9. Confirm the app opens Onboarding.
+
+## 5. Expected Event Order
 
 The exact order can vary slightly around screen events, but the journey should include:
 
@@ -62,9 +77,12 @@ habit_logged
 screen_viewed
 progress_viewed
 screen_viewed
+learning_journey_reset
+screen_viewed
+onboarding_started
 ```
 
-## 5. Event Parameter Checks
+## 6. Event Parameter Checks
 
 For `screen_viewed`, verify:
 
@@ -113,7 +131,13 @@ completion_count
 activation_status
 ```
 
-## 6. Duplicate Log Test
+For `learning_journey_reset`, verify:
+
+```text
+source
+```
+
+## 7. Duplicate Log Test
 
 After logging today once:
 
@@ -124,7 +148,7 @@ After logging today once:
 
 This confirms that analytics reflects real product behavior instead of button taps.
 
-## 7. User Property Checks
+## 8. User Property Checks
 
 Expected user properties:
 
@@ -138,7 +162,14 @@ suggested_habit_variant
 
 The values may appear after the relevant screen action occurs.
 
-## 8. Common DebugView Problems
+After reset, confirm these journey properties are cleared:
+
+```text
+onboarding_goal
+activation_status
+```
+
+## 9. Common DebugView Problems
 
 If events do not appear:
 

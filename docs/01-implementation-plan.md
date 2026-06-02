@@ -13,6 +13,7 @@ Functionality:
 1. Show four goals.
 2. Let the user select one goal.
 3. Continue to Habit Setup after selection.
+4. Resume to Habit Setup when a saved goal exists without an active habit.
 
 Goals:
 
@@ -55,6 +56,7 @@ Functionality:
 2. Let the user pick one habit.
 3. Save the selected habit.
 4. Continue to Home.
+5. Resume to Home when an active habit already exists.
 
 Example habits:
 
@@ -157,7 +159,8 @@ Functionality:
 2. List events emitted by the app.
 3. List Remote Config experiments.
 4. Explain what to check in Firebase DebugView.
-5. Navigate back to Home.
+5. Reset the local learning journey for repeated funnel practice.
+6. Navigate back to Home.
 
 Remote Config:
 
@@ -176,6 +179,7 @@ Analytics:
 
 ```text
 screen_viewed
+learning_journey_reset
 ```
 
 ## Development Rounds
@@ -305,3 +309,65 @@ Verification:
 ./gradlew.bat testDebugUnitTest
 ```
 
+### Round 9: Experiment Assignment Timing
+
+Scope:
+
+1. Refresh Remote Config before rendering experiment-controlled screens.
+2. Show a loading state while assignment is being prepared.
+3. Use one config snapshot for screen behavior and experiment exposure.
+4. Track Remote Config activation or fetch failure.
+5. Keep documented defaults when refresh fails.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```
+
+### Round 10: Reset Learning Journey
+
+Scope:
+
+1. Add an Analytics Lab reset action.
+2. Clear selected goal, active habit, and habit logs.
+3. Track `learning_journey_reset`.
+4. Clear journey user properties.
+5. Navigate back to Onboarding after reset.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```
+
+### Round 11: Analytics Lab Reference
+
+Scope:
+
+1. Add an in-app event catalog.
+2. Add an in-app Remote Config experiment catalog.
+3. Back the reference content with plain Kotlin models.
+4. Test that the catalog stays aligned with analytics and Remote Config constants.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```
+
+### Round 12: Resume Journey Routing
+
+Scope:
+
+1. Decide startup destination from saved local journey state.
+2. Start fresh users at Onboarding.
+3. Resume goal-only users at Habit Setup.
+4. Resume users with an active habit at Home.
+5. Keep the domain decision independent of navigation route names.
+
+Verification:
+
+```text
+./gradlew.bat testDebugUnitTest
+```

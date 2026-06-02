@@ -18,6 +18,7 @@ App Opened
   -> Habit Created
   -> Habit Logged
   -> Progress Viewed
+  -> Learning Journey Reset
 ```
 
 ## Events
@@ -156,6 +157,16 @@ Parameters:
 error_type
 ```
 
+### learning_journey_reset
+
+When: the user resets local journey state from Analytics Lab.
+
+Parameters:
+
+```text
+source
+```
+
 ## User Properties
 
 ```text
@@ -164,6 +175,13 @@ activation_status
 onboarding_variant
 home_headline_variant
 suggested_habit_variant
+```
+
+Reset clears:
+
+```text
+onboarding_goal
+activation_status
 ```
 
 ## Remote Config Keys
@@ -180,4 +198,3 @@ analytics_lab_enabled
 Each experiment should emit `experiment_exposed` when the user reaches the screen where the variant can influence behavior.
 
 Exposure should not be emitted merely because a config value was fetched.
-
